@@ -10,7 +10,6 @@ fun findByTitle(query: String, collection: MutableList<Movie>): List<Movie>{
     // matches :: (String, Film) -> Boolean
     val predicate = ::matches
 
-    // TODO side effect moved up (still on results)
     // add :: (Film) -> Boolean
     val add = fun (movie: Movie, movies: List<Movie>) = movies.plus(movie)
 
