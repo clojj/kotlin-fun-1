@@ -16,13 +16,13 @@ class FindByTitleKotlinTest {
 
     @Test
     fun `should return empty when non found`() {
-        val result = findByTitle("Other film", FILM_COLLECTION)
+        val result = findByTitle("Other film")(FILM_COLLECTION)
         assertTrue(result.isEmpty())
     }
 
     @Test
     fun `should return a matching movie`() {
-        val result = findByTitle("Matrix", FILM_COLLECTION)
+        val result = findByTitle("Matrix")(FILM_COLLECTION)
         assertNotNull(result)
     }
 
@@ -30,7 +30,7 @@ class FindByTitleKotlinTest {
     fun `should return all matching movies`(){
         val expectedResult = listOf(INTOUCHABLE, FORREST_GUMP)
 
-        val result = findByTitle("o", FILM_COLLECTION)
+        val result = findByTitle("o")(FILM_COLLECTION)
 
         assertEquals(expectedResult, result)
     }

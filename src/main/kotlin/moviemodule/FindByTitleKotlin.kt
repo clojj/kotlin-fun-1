@@ -2,30 +2,39 @@ package moviemodule
 
 
 // findByTitle :: (String, [Movie]) -> [Movie]
-fun findByTitle(query: String, collection: MutableList<Movie>): List<Movie> {
-    var results: List<Movie> = listOf()
+val findByTitle =
+        { query: String ->
+            { collection: MutableList<Movie> ->
+                var results: List<Movie> = listOf()
 
-    // matches :: (String, Film) -> Boolean
-    val predicate = ::matches
+                // matches :: (String, Film) -> Boolean
+                val predicate = matches
 
-    val add = fun(movie: Movie) = fun(movies: List<Movie>) = movies.plus(movie)
+                val add = { movie: Movie -> { movies: List<Movie> -> movies.plus(movie) } }
 
-    for (movie: Movie in collection) {
-        val fn = addIf(predicate, query, movie, add)
-        results = fn(results)
+                for (movie: Movie in collection) {
+                    results = addIf(predicate)(query)(movie)(add)(results)
+                }
+
+                results
+            }
+        }
+
+val addIf = { predicate: (String) -> (Movie) -> Boolean ->
+    { query: String ->
+        { movie: Movie ->
+            { add: (Movie) -> (List<Movie>) -> List<Movie> ->
+                if (matches(query)(movie)) {
+                    add(movie)
+                } else {
+                    nop
+                }
+            }
+        }
     }
-
-    return results
 }
 
-fun addIf(predicate: (String, Movie) -> Boolean, query: String, movie: Movie, add: (Movie) -> (List<Movie>) -> List<Movie>): (List<Movie>) -> List<Movie> {
-    if (predicate(query, movie)) {
-        return add(movie)
-    }
-    return nop()
-}
+val nop = { _: List<Movie> -> listOf<Movie>() }
 
-fun nop() = fun(_: List<Movie>) = listOf<Movie>()
-
-fun matches(query: String, movie: Movie) = movie.title.contains(query)
+val matches = { query: String -> { movie: Movie -> movie.title.contains(query) } }
 
