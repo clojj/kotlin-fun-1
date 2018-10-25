@@ -1,5 +1,9 @@
-class Main {
+import moviemodule.findByTitle
 
-    companion object {
-    }
+fun main() {
+/* TODO
+    findByTitle
+    comp definieren.. z.B. mit findBestRating, Movie mit "rating" erweitern
+*/
+
 }
