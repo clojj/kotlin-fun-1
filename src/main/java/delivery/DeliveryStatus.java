@@ -1,3 +1,5 @@
+package delivery;
+
 public class DeliveryStatus {
 
 	private final Stage stage;
