@@ -15,6 +15,7 @@ fun main() {
 
     // -------------- Kotlin mit DeliveryStatusKotlinNullable
 // TODO    DeliveryStatusKotlinNullable(DeliveryStatusKotlinNullable.Stage.PREPARING, null)
+// TODO    ?.----?.----- zeigen
 
 
 
